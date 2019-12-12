@@ -1,0 +1,32 @@
+<div id="cartCheckout" class="row">
+  <div class="col-sm-4">
+    <h2>Cart</h2>
+    <p>
+      <a routerLink="/shipping">Shipping Prices</a>
+    </p>
+    <div class="cart-item" *ngFor="let item of items" [routerLink]="['/products', goToDetail(item)]">
+      <span>{{ item.name }}</span>
+      <span>{{ item.price | currency }}</span>
+    </div>
+  </div>
+  <div class="col-sm-8 d-flex justify-content-end" *ngIf="items.length > 0">
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+      <label for="name">Nome*<br>
+        <input type="text" id="name" formControlName="name">
+      </label>
+      <label for="address">Indirizzo*<br>
+        <input type="text" id="address" formControlName="address">
+      </label>
+      <label for="tel">Telefono*<br>
+        <input type="text" id="tel" formControlName="tel">
+      </label>
+      <label for="msg">Messaggio*<br>
+        <input type="text" id="msg" formControlName="msg">
+      </label>
+      <label>
+        <button class="button" type="submit">Purchase</button>
+      </label>
+    </form>
+  </div>
+</div>
+<h4 *ngIf="!!subTotal">SubTotal = {{subTotal}}</h4>
